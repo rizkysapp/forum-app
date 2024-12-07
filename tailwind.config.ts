@@ -1,5 +1,7 @@
 import { Playfair } from "next/font/google";
 import type { Config } from "tailwindcss";
+const { violet, blackA, mauve, green } = require("@radix-ui/colors");
+/** @type {import('tailwindcss').Config} */
 
 const config = {
   darkMode: ["class"],
@@ -20,6 +22,10 @@ const config = {
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
+        ...mauve,
+        ...violet,
+        ...green,
+        ...blackA,
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
@@ -63,10 +69,24 @@ const config = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
+        overlayShow: {
+          from: { opacity: "0" },
+          to: { opacity: "1" },
+        },
+        contentShow: {
+          from: {
+            opacity: "0",
+            transform: "translate(-50%, -48%) scale(0.96)",
+          },
+          to: { opacity: "1", transform: "translate(-50%, -50%) scale(1)" },
+        },
       },
+
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        overlayShow: "overlayShow 150ms cubic-bezier(0.16, 1, 0.3, 1)",
+        contentShow: "contentShow 150ms cubic-bezier(0.16, 1, 0.3, 1)",
       },
       fontFamily: {
         Playfair: ["Playfair Display", "sans-serif"],
